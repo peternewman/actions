@@ -206,6 +206,11 @@ jobs:
         shell: bash
         run: |
           set -e
+          set -x
+
+          yarn node -e 'process.stdout.write("without silent"); process.exit(0);'
+          yarn --silent node -e 'process.stdout.write("with silent"); process.exit(0);'
+          
           PKG="@companion-module/tools"
 
           # Resolve the actually-installed version of PKG. We can't just read
