@@ -207,6 +207,13 @@ jobs:
         run: |
           set -e
           set -x
+
+          SILENT="--silent"
+          yarn --silent node -e 'process.exit(0);'
+          silentstatus=$?
+          if [ $silentstatus -ne 0 ]; then
+            SILENT="";
+          fi
         
           PKG="@companion-module/tools"
 
@@ -238,11 +245,7 @@ jobs:
             ' "$PKG" 2>/dev/null
           }
 
-          SILENT="--silent"          
           INSTALLED=$(get_version) || {
-            SILENT=""
-            INSTALLED=$(get_version)
-          } || {
             echo "::error::Could not resolve $PKG. The module must depend on it."
             exit 99
           }
