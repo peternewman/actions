@@ -238,6 +238,10 @@ jobs:
           echo "Installed $PKG version: $INSTALLED"
 
           MAJOR=${INSTALLED%%.*}
+          if [ -z "${MAJOR##*[!0-9]*}" ]; then
+            echo "::error::$PKG major version $MAJOR is not an integer, got installed version $INSTALLED."
+            exit 99
+          fi
           if [ "$MAJOR" -le 2 ]; then
             FLOOR="2.8.0"
           elif [ "$MAJOR" -eq 3 ]; then
