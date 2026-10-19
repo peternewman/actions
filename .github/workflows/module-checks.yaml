@@ -208,11 +208,9 @@ jobs:
           set -x
 
           SILENT="--silent"
-          yarn --silent node -e 'process.exit(0);'
-          silentstatus=$?
-          if [ $silentstatus -ne 0 ]; then
-            SILENT="";
-          fi
+          yarn --silent node -e 'process.exit(0);' || {
+            SILENT=""
+          }
 
           set -e
 
