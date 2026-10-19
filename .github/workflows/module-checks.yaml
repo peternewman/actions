@@ -209,7 +209,7 @@ jobs:
           set -x
 
           yarn node -e 'process.stdout.write("without silent"); process.exit(0);'
-          yarn --silent node -e 'process.stdout.write("with silent"); process.exit(0);'
+          yarn node --silent -e 'process.stdout.write("with silent"); process.exit(0);'
           
           PKG="@companion-module/tools"
 
