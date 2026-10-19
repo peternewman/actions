@@ -233,7 +233,8 @@ jobs:
               }
               console.log("Failed to find a package.json file");
               process.exit(3);
-            ' "$PKG" 2>/dev/null
+            ' "$PKG"
+            #2>/dev/null
           }
 
           FOO=get_version
