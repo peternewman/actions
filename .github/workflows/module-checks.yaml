@@ -221,24 +221,26 @@ jobs:
               const fs = require("fs"), path = require("path");
               const name = process.argv[1];
               let dir = path.dirname(require.resolve(name));
+              console.log(dir);
               while (dir !== path.dirname(dir)) {
                 const pj = path.join(dir, "package.json");
+                console.log(pj)
                 if (fs.existsSync(pj)) {
                   const j = JSON.parse(fs.readFileSync(pj, "utf8"));
                   if (j.name === name) { process.stdout.write(j.version); process.exit(0); }
                 }
                 dir = path.dirname(dir);
               }
+              console.log("Failed to find a package.json file");
               process.exit(3);
             ' "$PKG" 2>/dev/null
           }
 
+          FOO=get_version
+
+
           INSTALLED=$(get_version) || {
             echo "::error::Could not resolve $PKG. The module must depend on it."
-
-            yarn --help
-            yarn node --help
-            
             exit 99
           }
           echo "Installed $PKG version: $INSTALLED"
