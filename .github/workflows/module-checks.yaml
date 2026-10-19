@@ -207,7 +207,7 @@ jobs:
         run: |
           set +e
           SILENT="--silent"
-          yarn --silent node -e 'process.exit(0);' || {
+          yarn --silent node -e 'process.exit(0);' 2>/dev/null || {
             SILENT=""
           }
           set -e
