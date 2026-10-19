@@ -207,11 +207,11 @@ jobs:
         run: |
           set -x
 
+          set +e
           SILENT="--silent"
           yarn --silent node -e 'process.exit(0);' || {
             SILENT=""
           }
-
           set -e
 
           PKG="@companion-module/tools"
